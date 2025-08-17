@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaskFlow - Smart Task Manager</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <script src="https://unpkg.com/jwt-decode/build/jwt-decode.js"></script>
+</head>
+<body>
+    <div id="authContainer" class="auth-container">
+        <div id="loginSection" class="auth-section">
+            <div class="auth-form-side">
+                <div class="auth-form">
+                    <div class="brand-header">
+                        <div class="brand-logo">
+                            <div class="logo-icon">📊</div>
+                            <span class="brand-name">TaskFlow</span>
+                        </div>
+                    </div>
+
+                    <div class="welcome-section">
+                        <h1>Welcome back 👋</h1>
+                        <p>Sign in to your account to continue</p>
+                    </div>
+
+                    <button class="google-signin-btn" type="button" id="google-login-btn">
+                        Sign in with Google
+                    </button>
+
+                    <div class="divider">
+                        <span>Or sign in with email</span>
+                    </div>
+
+                    <form id="loginForm" class="auth-form-fields">
+                        <div class="form-group">
+                            <label for="loginEmail">Email</label>
+                            <input type="email" id="loginEmail" placeholder="Enter your email address" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="loginPassword">Password</label>
+                            <div class="password-input">
+                                <input type="password" id="loginPassword" placeholder="Enter your password" required>
+                                <button type="button" class="password-toggle" onclick="togglePassword('loginPassword')">
+                                    👁️
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="form-options">
+                            <label class="checkbox-container">
+                                <input type="checkbox" id="rememberMe">
+                                <span class="checkmark"></span>
+                                Remember me
+                            </label>
+                        </div>
+
+                        <button type="submit" class="signin-btn">Sign in</button>
+                    </form>
+                    
+                    <div class="auth-switch">
+                        <p>Don't have an account? <a href="#" onclick="showSignup()">Sign up</a></p>
+                    </div>
+                </div>
+            </div>
+            <div class="auth-visual-side">
+                <div class="visual-content">
+                    <div class="app-icon">
+                        <div class="icon-container">
+                            📊
+                        </div>
+                    </div>
+                    <h2>Manage Tasks Efficiently</h2>
+                    <p>Organize your work and life with our powerful task management platform</p>
+                </div>
+                <div class="background-shapes">
+                    <div class="shape shape-1"></div>
+                    <div class="shape shape-2"></div>
+                    <div class="shape shape-3"></div>
+                </div>
+            </div>
+        </div>
+
+        <div id="signupSection" class="auth-section hidden">
+            <div class="auth-form-side">
+                <div class="auth-form">
+                    <div class="brand-header">
+                        <div class="brand-logo">
+                            <div class="logo-icon">📊</div>
+                            <span class="brand-name">TaskFlow</span>
+                        </div>
+                    </div>
+
+                    <div class="welcome-section">
+                        <h1>Create Account 🚀</h1>
+                        <p>Join TaskFlow and start organizing your tasks</p>
+                    </div>
+
+                    <button class="google-signin-btn" type="button" id="google-signup-btn">
+                        Sign up with Google
+                    </button>
+
+                    <div class="divider">
+                        <span>Or sign up with email</span>
+                    </div>
+
+                    <form id="signupForm" class="auth-form-fields">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="firstName">First Name</label>
+                                <input type="text" id="firstName" placeholder="First name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="lastName">Last Name</label>
+                                <input type="text" id="lastName" placeholder="Last name" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="signupEmail">Email</label>
+                            <input type="email" id="signupEmail" placeholder="Enter your email address" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="signupPassword">Password</label>
+                            <div class="password-input">
+                                <input type="password" id="signupPassword" placeholder="Create a password" required minlength="6">
+                                <button type="button" class="password-toggle" onclick="togglePassword('signupPassword')">
+                                    👁️
+                                </button>
+                            </div>
+                            <small class="password-hint">Minimum 6 characters</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="confirmPassword">Confirm Password</label>
+                            <div class="password-input">
+                                <input type="password" id="confirmPassword" placeholder="Confirm your password" required>
+                                <button type="button" class="password-toggle" onclick="togglePassword('confirmPassword')">
+                                    👁️
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="form-options">
+                            <label class="checkbox-container">
+                                <input type="checkbox" id="agreeTerms" required>
+                                <span class="checkmark"></span>
+                                I agree to the Terms of Service and Privacy Policy
+                            </label>
+                        </div>
+
+                        <button type="submit" class="signin-btn">Create Account</button>
+                    </form>
+
+                    <div class="auth-switch">
+                        <p>Already have an account? <a href="#" onclick="showLogin()">Sign in</a></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="auth-visual-side">
+                <div class="visual-content">
+                    <div class="app-icon">
+                        <div class="icon-container">
+                            🚀
+                        </div>
+                    </div>
+                    <h2>Start Your Journey</h2>
+                    <p>Join thousands of users who trust TaskFlow to manage their daily tasks efficiently</p>
+                </div>
+                <div class="background-shapes">
+                    <div class="shape shape-1"></div>
+                    <div class="shape shape-2"></div>
+                    <div class="shape shape-3"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="appContainer" class="app-container hidden">
+        <header class="app-header">
+            <div class="header-content">
+                <div class="brand-logo">
+                    <div class="logo-icon">📊</div>
+                    <span class="brand-name">TaskFlow</span>
+                </div>
+                <div class="user-section">
+                    <span id="userGreeting" class="user-greeting"></span>
+                    <div class="user-menu">
+                        <button class="user-avatar" id="userAvatar" type="button" aria-label="User menu">
+                            <span id="userInitials"></span>
+                        </button>
+                        <div class="user-dropdown hidden" id="userDropdown">
+                            <a href="#" onclick="logout()">Logout</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <div class="container">
+                <div class="page-header">
+                    <div class="header-text">
+                        <h1>My Tasks</h1>
+                        <p>Organize and track your daily tasks</p>
+                    </div>
+                    <button class="add-task-btn" onclick="showAddTaskModal()">
+                        <span class="btn-icon">+</span>
+                        Add Task
+                    </button>
+                </div>
+
+                <div class="task-stats">
+                    <div class="stat-card">
+                        <div class="stat-number" id="totalTasks">0</div>
+                        <div class="stat-label">Total Tasks</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="completedTasks">0</div>
+                        <div class="stat-label">Completed</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="pendingTasks">0</div>
+                        <div class="stat-label">Pending</div>
+                    </div>
+                </div>
+
+                <div class="task-filters">
+                    <button class="filter-btn active" data-filter="all">All Tasks</button>
+                    <button class="filter-btn" data-filter="pending">Pending</button>
+                    <button class="filter-btn" data-filter="completed">Completed</button>
+                </div>
+
+                <div class="task-list-container">
+                    <div id="taskList" class="task-list">
+                        </div>
+                    <div id="emptyState" class="empty-state hidden">
+                        <div class="empty-icon">📝</div>
+                        <h3>No tasks yet</h3>
+                        <p>Create your first task to get started!</p>
+                        <button class="add-task-btn" onclick="showAddTaskModal()">
+                            <span class="btn-icon">+</span>
+                            Add Your First Task
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div id="addTaskModal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">Add New Task</h2>
+                <button class="close-btn" onclick="closeAddTaskModal()">&times;</button>
+            </div>
+            <form id="addTaskForm" class="modal-form">
+                <div class="form-group">
+                    <label for="taskTitle">Task Title</label>
+                    <input type="text" id="taskTitle" placeholder="Enter task title" required>
+                </div>
+                <div class="form-group">
+                    <label for="taskDescription">Description (Optional)</label>
+                    <textarea id="taskDescription" placeholder="Enter task description" rows="3"></textarea>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="taskPriority">Priority</label>
+                        <select id="taskPriority">
+                            <option value="low">Low</option>
+                            <option value="medium" selected>Medium</option>
+                            <option value="high">High</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="taskDueDate">Due Date</label>
+                        <input type="date" id="taskDueDate">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="taskCategory">Category</label>
+                    <select id="taskCategory">
+                        <option value="work">Work</option>
+                        <option value="personal">Personal</option>
+                        <option value="shopping">Shopping</option>
+                        <option value="health">Health</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="cancel-btn" onclick="closeAddTaskModal()">Cancel</button>
+                    <button type="submit" class="submit-btn" id="submitTaskBtn">Add Task</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="toastContainer" class="toast-container"></div>
+    
+    <div id="loadingOverlay" class="loading-overlay hidden">
+        <div class="loading-spinner"></div>
+        <p>Loading...</p>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
